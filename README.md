@@ -9,8 +9,8 @@
 *************************************************************************
 
 
-#-------------------------- PI COMPUTATION  -----------------------------#
-*This part relies on the following files: 
+# PI COMPUTATION 
+This part relies on the following files: 
 	1 .  	The vcf from 1000G project, 1 per chromosome (http://hgdownload.cse.ucsc.edu/gbdb/hg19/1000Genomes/phase3/).
 	2 . 	The bed file that combine strictMack infos (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/accessible_genome_masks/),
 		the YRI recombination map from HapMap (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/working/20130507_omni_recombination_rates/) and
@@ -22,7 +22,7 @@
 	3 .	For each population, I have the name of the 10 individuals studied in Pouyet et al., 2018 (files named: 1000G_${pop}names.txt
 	4.	I used bedtools intersect to get the 13,385,820 SNPs from Pouyet et al., 2018 that are within strictMask and transorm them in 1 based coordinates : 1000GPAN.position.strict_mask_1based 
 	
-# I used the following commandline in a bash script to get pi per sites:
+# Get pi per sites:
 
 #!/bin/bash
 
@@ -35,7 +35,7 @@ vcftools --gzvcf /storage/data/1000G/vcf/ALL.chr${i}.phase3_shapeit2_mvncall_int
 done
 
 
-# Merge all these data to have a final table with PI for each population and all autosomes.
+# Merge data  for each population and all autosomes.
 
 for chrom in {1..22};do 
  for pop in YRI LWK GBR IBS BEB CLM KHV JPT PJL PEL; do 
@@ -51,13 +51,13 @@ for chrom in {1..22};do
  cat header chr${chrom}.RR1p-1p5.sites.pi > tmp ; mv tmp chr${chrom}.RR1p-1p5.sites.pi
 done
 
-*Then run windowingpi.R to have windows of 2Mb (step 0.5Mb)
-#FINAL FILES :
+# Windows of Pi
+Then run windowingpi.R to have windows of 2Mb (step 0.5Mb)
+FINAL FILES :
 	1. nucdiv.Rec0p05-0p1.windows2Mb-step0p5Mb.pi
 	2. nucdiv.Rec0p05-1p0.windows2Mb-step0p5Mb.pi
 
-
-#----------------------- MAKING Figures  --------------------#
+# Figures 
 *See the R script Fig_mAOD_HumanAnalyses.R
 	1 .	Makes Supplemental Index with figures of Pi scans, SFS and heatmaps
 	 	while Fig4 is a panel of supplemental item done using inkscape
