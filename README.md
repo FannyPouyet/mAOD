@@ -1,15 +1,9 @@
-*************************************************************************
-***           Scripts to perform the human analyses                   ***
-***   from the paper Transition from background selection to          ***
-***  associative overdominance promotes diversity in regions of       ***
-***                low recombination                                  ***
-***   by Gilbert, Pouyet, Excoffier and Peischl                       ***
-***   Theses scripts were prepared by Fanny Pouyet on 2019.           ***
-***              Last update 22.08.2019                               ***
-*************************************************************************
+Scripts to perform the human analyses from the paper "Transition from background selection toassociative overdominance promotes diversity in regions of low recombination", by Gilbert, Pouyet, Excoffier and Peischl.
+Theses scripts were prepared by Fanny Pouyet on 2019.
+*Last update 22.08.2019 
 
 
-# PI COMPUTATION 
+# PI computation 
 This part relies on the following files: 
 	1 .  	The vcf from 1000G project, 1 per chromosome (http://hgdownload.cse.ucsc.edu/gbdb/hg19/1000Genomes/phase3/).
 	2 . 	The bed file that combine strictMack infos (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/supporting/accessible_genome_masks/),
@@ -58,7 +52,7 @@ FINAL FILES :
 	2. nucdiv.Rec0p05-1p0.windows2Mb-step0p5Mb.pi
 
 # Figures 
-*See the R script Fig_mAOD_HumanAnalyses.R
+See the R script Fig_mAOD_HumanAnalyses.R
 	1 .	Makes Supplemental Index with figures of Pi scans, SFS and heatmaps
 	 	while Fig4 is a panel of supplemental item done using inkscape
 	 	I have computed the number of SNPs for LR and MR for each window on the file NbSNP_LR_MR_perwindow.txt using the genotype table with all SNPs
