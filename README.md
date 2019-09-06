@@ -10,7 +10,7 @@ This part relies on the following files:
 		the YRI recombination map from HapMap (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/working/20130507_omni_recombination_rates/) and
 		the CpG sites identified in the paper Pouyet et al., 2018 (referenced in the current manuscript; any C->T followed by a G and G->A following a C 
 			from the genotype table of diallelic SNPs of Pouyet et al,2018).
-		I used bedtools merge for strictMask and the rec. map and bedtools subtract for the merged bed and the CpG sites.
+		I used bedtools intersect for strictMask and the rec. map and bedtools subtract for the intersected bed and the CpG sites.
 		I extracted using awk a bed file for regions with recombination rate > 0cM/Mb and <=0.05 cM/Mb as well as a bed for regions >= 1 and < 1.5 cM/Mb.
 		--> Theses files are: strict_mask_YRI.recomb.Rec0p05-0p1.noCpG.bed and strict_mask_YRI.recomb.Rec1p-1p5.noCpG.bed
 	3 .	For each population, I have the name of the 10 individuals studied in Pouyet et al., 2018 (files named: 1000G_${pop}names.txt
