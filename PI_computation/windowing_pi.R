@@ -14,7 +14,7 @@ begining.colnames = c("CHROM","BIN_START","BIN_END")
 pop.names =  c("YRI","LWK","GBR","IBS","BEB","PJL","KHV","JPT","CLM","PEL")
 window.range = read.table("windows2Mb_step0p5Mb",h=T)
 
-for(rec in c("lowRec0p05","Rec1p-1p5")){
+for(rec in c("lowRec0p05","RR0p1-0p5")){
   print(rec)
   bed.file.low.rec = read.table(paste("strict_mask_YRI.recomb.",rec,".noCpG.bed",sep=""))
   covered.low.rec=list()
@@ -27,12 +27,10 @@ for(rec in c("lowRec0p05","Rec1p-1p5")){
          covered.low.rec[[chrom]][i] = sum(low.rec[,3] -low.rec[,2])
     }
   }
-  rec2<-rec
-  if(rec=="Rec1p-1p5") rec2 <- "RR1p-1p5"
 
   print("start_compute")
   for(chrom in c(1,10:19,2,20:22, 3:9)){
-    pi.sites = read.table(paste("chr",chrom,".",rec2,".sites.pi",sep=""),h=T)
+    pi.sites = read.table(paste("chr",chrom,".",rec,".sites.pi",sep=""),h=T)
     #initialisation
     window.pi <- cbind(window.range[window.range[,1]==chrom ,], as.data.frame(matrix(0,ncol=10,nrow= sum(window.range[,1]==chrom))) )    
     # create output table
@@ -49,6 +47,6 @@ for(rec in c("lowRec0p05","Rec1p-1p5")){
   }
   print("wrintingoutput")
   colnames(pi.output)<- colnames(pi.sites)
-  write.table(pi.output, paste("nucdiv.",rec2,".windows2Mb-step0p5Mb.pi", sep=""),col.names = T,quote=F,row.names = F,sep="\t")
+  write.table(pi.output, paste("nucdiv.",rec,".windows2Mb-step0p5Mb.pi", sep=""),col.names = T,quote=F,row.names = F,sep="\t")
   rm(pi.output)
 }
