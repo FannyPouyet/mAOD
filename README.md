@@ -1,6 +1,6 @@
 Scripts to perform the human analyses from the paper "Transition from background selection toassociative overdominance promotes diversity in regions of low recombination", by Gilbert, Pouyet, Excoffier and Peischl.
 Theses scripts were prepared by Fanny Pouyet on 2019.
-*Last update 22.08.2019 
+*Last update 06.11.2019 
 
 
 # PI computation 
@@ -11,8 +11,8 @@ This part relies on the following files:
 		the CpG sites identified in the paper Pouyet et al., 2018 (referenced in the current manuscript; any C->T followed by a G and G->A following a C 
 			from the genotype table of diallelic SNPs of Pouyet et al,2018).
 		I used bedtools intersect for strictMask and the rec. map and bedtools subtract for the intersected bed and the CpG sites.
-		I extracted using awk a bed file for regions with recombination rate > 0cM/Mb and <=0.05 cM/Mb as well as a bed for regions >= 1 and < 1.5 cM/Mb.
-		--> Theses files are: strict_mask_YRI.recomb.Rec0p05-0p1.noCpG.bed and strict_mask_YRI.recomb.Rec1p-1p5.noCpG.bed
+		I extracted using awk a bed file for regions with recombination rate > 0cM/Mb and <=0.05 cM/Mb as well as a bed for regions >= 0.1 and < 0.5 cM/Mb.
+		--> Theses files are: strict_mask_YRI.recomb.Rec0p05-0p1.noCpG.bed and strict_mask_YRI.recomb.Rec0p1-0p5.noCpG.bed
 	3 .	For each population, I have the name of the 10 individuals studied in Pouyet et al., 2018 (files named: 1000G_${pop}names.txt
 	4.	I used bedtools intersect to get the 13,385,820 SNPs from Pouyet et al., 2018 that are within strictMask and transorm them in 1 based coordinates : 1000GPAN.position.strict_mask_1based 
 	
@@ -40,20 +40,20 @@ for chrom in {1..22};do
  rm chr${chrom}.pos chrYRI${chrom}.sites.pi chrLWK${chrom}.sites.pi chrGBR${chrom}.sites.pi chrIBS${chrom}.sites.pi chrKHV${chrom}.sites.pi chrJPT${chrom}.sites.pi chrBEB${chrom}.sites.pi chrCLM${chrom}.sites.pi chrPJL${chrom}.sites.pi chrPEL${chrom}.sites.pi 
  sed -i '1d' chr${chrom}.sites.pi
  bedtools intersect -a chr${chrom}.sites.pi -b strict_mask_YRI.recomb.lowRec0p05.noCpG.bed> chr${chrom}.lowRec0p05.sites.pi 
- bedtools intersect -a chr${chrom}.sites.pi -b strict_mask_YRI.recomb.Rec1p-1p5.noCpG.bed > chr${chrom}.RR1p-1p5.sites.pi
+ bedtools intersect -a chr${chrom}.sites.pi -b strict_mask_YRI.recomb.Rec0p1-0p5.noCpG.bed > chr${chrom}.RR01p-0p5.sites.pi
  cat header chr${chrom}.lowRec0p05.sites.pi > tmp ; mv tmp chr${chrom}.lowRec0p05.sites.pi
- cat header chr${chrom}.RR1p-1p5.sites.pi > tmp ; mv tmp chr${chrom}.RR1p-1p5.sites.pi
+ cat header chr${chrom}.RR0p1-0p5.sites.pi > tmp ; mv tmp chr${chrom}.RR0p1-0p5.sites.pi
 done
 
 # Windows of Pi
 Then run windowingpi.R to have windows of 2Mb (step 0.5Mb)
 FINAL FILES :
 	1. nucdiv.Rec0p05-0p1.windows2Mb-step0p5Mb.pi
-	2. nucdiv.Rec0p05-1p0.windows2Mb-step0p5Mb.pi
+	2. nucdiv.RR0p1-0p5.windows2Mb-step0p5Mb.pi
 
 # Figures 
 See the R script Fig_mAOD_HumanAnalyses.R
 	1 .	Makes Supplemental Index with figures of Pi scans, SFS and heatmaps
 	 	while Fig4 is a panel of supplemental item done using inkscape
-	 	I have computed the number of SNPs for LR and MR for each window on the file NbSNP_LR_MR_perwindow.txt using the genotype table with all SNPs
+	 	I have computed the number of SNPs for LR and MR for each window in a file NbSNP_LR_MR_perwindow.txt using the genotype table with all SNPs
 
